@@ -1,0 +1,129 @@
+.decoration {
+    position: absolute;
+    z-index: -10;
+}
+.decoration__circle-orange {
+    background-image: url(../img/deco-hero1.svg);
+    background-size: contain;
+}
+.decoration__circle-orange--small {
+    width: toRem(252);
+    height: toRem(252);
+}
+.decoration__circle-orange--big {
+    width: toRem(567);
+    height: toRem(567);
+
+}
+.decoration__circle-blue {
+    background-image: url(../img/deco-hero2.svg);
+    background-size: contain;
+}
+
+.decoration__glass {
+    width: toRem(200);
+    height: toRem(200);
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: toRem(16);
+    box-shadow: toRem(0) toRem(4) toRem(30) rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(toRem(5));
+    -webkit-backdrop-filter: blur(toRem(5));
+    border: toRem(1) solid rgba(255, 255, 255, 0.3);
+}
+
+.decoration__circle-white {
+    background-color: transparent;
+    border: toRem(1) solid #F8F0E4;
+
+}
+
+.decoration__circle-white--hero, .decoration__circle-white--about-1{
+    width: toRem(712);
+    height: toRem(712);
+    border-radius: toRem(712);
+    top: -90%;
+    right: -20%;
+}
+
+.decoration__circle-orange--hero { 
+    top: 0%;
+    right: 90%;
+}
+
+.decoration__circle-blue--hero {
+    width: toRem(142);
+    height: toRem(142);
+
+    bottom: -5%;
+    right: 90%;
+
+    @include desktop { 
+        bottom: -10%;
+        right: 2%;
+    }
+
+}
+
+
+.decoration__circle-orange--small--about {
+    top: 5%;
+    right: -5%;
+    width: toRem(150);
+    height: toRem(150);
+}
+
+.decoration__circle-orange--big--about {
+
+    display: none; 
+    @include desktop { 
+        display: block;
+        top: 10%;
+        right: -7%;
+        transform: rotate(24deg);
+    }
+    }
+
+
+.decoration__circle-blue--small--about {
+    height: toRem(50);
+    width: toRem(50);
+    left: 0;
+    top: 25%;
+}
+
+.decoration__glass--about-1 {
+    z-index: 1;
+    right: 0%;
+    top: 20%;
+    width: toRem(200);
+    height: toRem(100);
+
+    @include desktop {
+        z-index: 1;
+        right: 40%;
+        top: 30%;
+        width: toRem(200);
+        height: toRem(200);
+    }
+
+}
+
+.decoration__circle-white--about-1 {
+    right: 90%;
+    top: 50%;
+}
+.decoration__glass--about-2 {
+
+    
+
+    z-index: 1;
+    left: 80%;
+    bottom: -2%;
+    height: toRem(88);
+    width: toRem(587);
+
+    @include desktop { 
+        height: toRem(148);
+        width: toRem(357);
+    }
+}

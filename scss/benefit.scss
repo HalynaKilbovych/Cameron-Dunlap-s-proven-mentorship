@@ -1,0 +1,101 @@
+.benefit {
+}
+.benefit__container {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    position: relative;
+
+
+
+    @include tablet { 
+        flex-direction: row;
+        height: toRem(360);
+        overflow: scroll;
+    }
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+.benefit__left {
+    width: 100%;
+    height: toRem(350);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: url(../img/benefit-bg.jpg);
+    background-size: cover;
+    background-position: center;
+    border-radius: inherit;
+    position: sticky;
+    top: 0;
+    border-radius: toRem(30);
+    z-index: 1;
+
+    @include tablet { 
+        width: 50%;
+    }
+}
+
+
+.benefit__left::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: toRem(0) toRem(4) toRem(30) rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(toRem(5));
+    -webkit-backdrop-filter: blur(toRem(5));
+    background: rgba(255, 255, 255, 0.062); 
+    z-index: -1;
+}
+.benefit__title {
+    text-align: center;
+}
+.benefit__right {
+
+
+    width: 100%;
+    @include tablet { 
+        width: 50%;
+    }
+}
+.benefit__list {
+    display: flex;
+    flex-direction: column;
+    gap: toRem(20);
+}
+.benefit__item {
+    padding: toRem(20);
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: toRem(30);
+    box-shadow: toRem(0) toRem(4) toRem(30) rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(toRem(5));
+    -webkit-backdrop-filter: blur(toRem(5));
+    border: toRem(1) solid rgba(255, 255, 255, 0.3);
+    @include tablet { 
+        padding: toRem(50);
+    }
+
+    @include desktop { 
+        padding: toRem(50) toRem(100);
+    }
+}
+.benefit__sub-title {
+    font-size: toRem(32);
+    text-align: center;
+    line-height: 120%;
+}
+.benefit__text {
+    font-size: toRem(24);
+    text-align: center;
+    line-height: 120%;
+}
+.benefit__btn {
+    margin-top: toRem(50);
+    margin-left: auto;
+    margin-right: auto;
+    max-width: toRem(450);
+}

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Design and HTML CSS layout «NEW_PROJECT_NAME»</title>
+	</head>
+	<body>
+		<div class="rootpage">
+			<h1>Design and HTML CSS layout «NEW_PROJECT_NAME»</h1>
+			<div class="rootpage__info" style="max-width: 600px;">
+				A landing page for Cameron Dunlap’s real estate investment program, designed to help users join the top 1% of investors. It highlights risk-free strategies, personal mentorship, an exclusive investor network, and ready-to-use tools for fast success.
+
+				<ol class="rootpage__list" style="margin-top: 20px;">
+					<li>Responsive Design – adapts seamlessly to all devices.</li>
+					<li>Clear Structure – well-organized content for easy navigation.</li>
+					<li>Strong CTAs – eye-catching buttons drive conversions.</li>
+					<li>User-Friendly UX – intuitive layout enhances readability.</li>
+					<li>Optimized Performance – fast loading for a smooth experience.</li>
+					<li>SEO-Ready – proper HTML structure for better search rankings.</li>
+				</ol>
+			</div>
+			<h2>Ready Page</h2>
+			<ol class="rootpage__list">
+				<li><a target="_blank" href="home.html">Home</a></li>
+			</ol>
+			<div class="rootpage__tnx">
+				<h2>Thank for this project, Michael Zimov from REWN!</h2>
+				<p>Your feedback on our collaboration would be greatly appreciated — it not only helps others make informed decisions but also allows me to refine and improve my services. As a thank you, I’d love to offer you a discount on your next project . </p>
+				<p>Just drop me a quick note once it’s done, and I’ll make sure you get it!</p>
+			</div>
+			<div class="rootpage__contacts">
+				<h2>Contact me on Upwork</h2>
+				<p><a href="https://www.upwork.com/freelancers/halynakilb">Upwork profile</a></p>
+			</div>
+		</div>
+	</body>
+	<style>
+		@charset "UTF-8";
+		@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+		* ,*::before, *::after {
+			padding: 0px;
+			margin: 0px;
+			border: 0px;
+			box-sizing: border-box; 
+		}
+		html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+			min-width: 320px;
+			width: 100%;
+			color: #fff;
+			background-color: #5e5373;
+		}
+		body {
+			font-family: Montserrat;
+			font-size: 100%;
+			line-height: 1;
+			font-size: 1rem;
+		}
+		a {
+			text-decoration: underline;
+			color: #ebe691
+		}
+		a:visited {
+			text-decoration: underline;
+			color: #aaa768;
+		}
+			a:hover {
+			text-decoration: none;
+		}
+		ul li {
+			list-style: none;
+		}
+		img {
+			vertical-align: top;
+		}
+		.wrapper {
+			width: 100%;
+			min-height: 100%;
+			overflow: hidden;
+		}
+		.rootpage{
+			padding: 30px;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+		}
+		@media (max-width: 767px) {
+			.rootpage{
+				padding:30px 15px;
+			}
+		}
+		h1 {
+			color: #ebe691;
+			font-size: 2.5rem;
+			margin: 0px 0px 1.25rem 0px;
+		}
+		@media (max-width: 767px) {
+			h1 {
+				font-size: 1.85rem;
+				margin: 0px 0px 1.25rem 0px;
+			}
+		}
+		h2 {
+			color: #ebe691;
+			font-size: 1.25rem;
+			margin: 0px 0px 1rem 0px;
+		}
+		@media (max-width: 767px) {
+			 h2 {
+				font-size: 1.125rem;
+				margin: 0px 0px 1rem 0px;
+			}
+		}
+		.rootpage__info{
+			line-height: 140%;
+			margin: 0px 0px 1.5rem 0px;
+		}
+
+		.rootpage__list{
+			margin: 0px 0px 2.25rem 1.25rem;
+		}
+		.rootpage__list li:not(:last-child){
+			margin: 0px 0px 15px 0px;
+		}
+		.rootpage__contacts,
+		.rootpage__tnx{
+			border-radius: 200px;
+			padding: 20px 65px;
+			line-height: 140%;
+		}
+		@media (max-width: 767px){
+		.rootpage__contacts,
+		.rootpage__tnx{
+			border-radius:40px;
+			padding: 20px;
+		}
+		}
+		.rootpage__contacts{
+			background: #32b5a4;
+			
+		}
+		.rootpage__contacts a{
+			color: #ebe691;
+		}
+		.rootpage__tnx{
+			background: #c22d63;
+			margin: 0px 0px 1rem 0px;
+		}
+	</style>
+</html>
