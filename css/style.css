@@ -4133,12 +4133,6 @@ body {
   font-size: .75rem;
   line-height: 1rem
 }
-.hero {
-  -webkit-animation: backInDown;
-  animation: backInDown;
-  -webkit-animation-duration: 2s;
-  animation-duration: 2s
-}
 .about {
   padding: 6.25rem 0
 }
@@ -4173,9 +4167,14 @@ body {
   max-height: 21.875rem;
   border-radius: 3.125rem;
   overflow: hidden;
+  opacity: 0;
   display: flex;
   align-items: center;
-  justify-content: center
+  justify-content: center;
+  transition: opacity 2s
+}
+.about__img-wrap._watcher-view {
+  opacity: 1
 }
 .numbers {
   position: relative
@@ -5452,6 +5451,9 @@ button.swiper-pagination-bullet {
     height: 12.875rem;
     top: 65%;
     left: 15%
+  }
+  .hero {
+    height: 100vh
   }
   .hero__container {
     flex-direction: row

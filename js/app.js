@@ -4334,4 +4334,6 @@
     showMore();
     pageNavigation();
     digitsCounter();
+    const app_element = document.querySelector(".about__img-wrap");
+    if (app_element.classList.contains("_watcher-view")) app_element.classList.add("animate__animated", "animate__backInDown");
 })();
