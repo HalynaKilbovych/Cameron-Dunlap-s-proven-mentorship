@@ -226,7 +226,7 @@ body {
   transition: opacity 1s ease-in-out,-webkit-transform 1s ease-in-out;
   transition: transform 1s ease-in-out,opacity 1s ease-in-out;
   transition: transform 1s ease-in-out,opacity 1s ease-in-out,-webkit-transform 1s ease-in-out;
-  transition-delay: 3.5s;
+  transition-delay: 1s;
   opacity: 1
 }
 .header__logo {
@@ -434,7 +434,7 @@ body {
   transition: opacity 1s ease-in-out,-webkit-transform 1s ease-in-out;
   transition: transform 1s ease-in-out,opacity 1s ease-in-out;
   transition: transform 1s ease-in-out,opacity 1s ease-in-out,-webkit-transform 1s ease-in-out;
-  transition-delay: 1s;
+  transition-delay: .5s;
   opacity: 1
 }
 .hero__content-side {
