@@ -126,6 +126,42 @@ body {
   min-width: 0;
   grid-column: 3/4
 }
+.gradient-text {
+  background: linear-gradient(to right,#eb7d00,#feb803,#8d66ef);
+  -webkit-animation: rainbow 2s ease-in-out infinite;
+  animation: rainbow 2s ease-in-out infinite;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: #fff;
+  display: block;
+  text-align: center;
+  transition: color .2s ease-in-out
+}
+.gradient-text:hover {
+  color: transparent
+}
+@-webkit-keyframes rainbow {
+  0% {
+    background-position: left
+  }
+  50% {
+    background-position: right
+  }
+  100% {
+    background-position: left
+  }
+}
+@keyframes rainbow {
+  0% {
+    background-position: left
+  }
+  50% {
+    background-position: right
+  }
+  100% {
+    background-position: left
+  }
+}
 .icon-menu {
   display: none
 }
@@ -188,7 +224,6 @@ body {
   justify-content: center;
   text-transform: uppercase;
   text-align: center;
-  background: linear-gradient(180deg,#ffbf00 0,#ea7900 100%);
   border-radius: 5.3125rem;
   padding: 1.0625rem;
   max-width: 700px
@@ -196,16 +231,34 @@ body {
 .btn--primary {
   padding: 1.25rem 3.125rem
 }
+.btn-hover {
+  color: #fff;
+  cursor: pointer;
+  height: 55px;
+  text-align: center;
+  border: none;
+  background-size: 300% 100%;
+  border-radius: 50px;
+  moz-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out
+}
 .btn-hover:hover {
   background-position: 100% 0;
   moz-transition: all .4s ease-in-out;
   transition: all .4s ease-in-out
 }
+.btn-hover:focus {
+  outline: 0
+}
+.btn-hover.color-1 {
+  background-image: linear-gradient(to right,#eb7d00,#feb803,#feb803,#42248e);
+  box-shadow: 0 4px 15px 0 rgba(232,223,95,.25)
+}
 .header {
   margin: 1.25rem 0
 }
 .header__container {
-  background: rgba(255,255,255,.2);
+  backgrounnd: rgba(255,255,255,.2);
   border-radius: 3.125rem;
   box-shadow: 0 .25rem 1.875rem rgba(0,0,0,.1);
   backdrop-filter: blur(.3125rem);
