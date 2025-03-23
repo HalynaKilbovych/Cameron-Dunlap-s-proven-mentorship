@@ -1,6 +1,13 @@
 (() => {
     "use strict";
     const modules_flsModules = {};
+    function addLoadedClass() {
+        if (!document.documentElement.classList.contains("loading")) window.addEventListener("load", (function() {
+            setTimeout((function() {
+                document.documentElement.classList.add("loaded");
+            }), 0);
+        }));
+    }
     function getHash() {
         if (location.hash) return location.hash.replace("#", "");
     }
@@ -1923,7 +1930,7 @@
         slideToClosest,
         slideToClickedSlide
     };
-    function loopCreate(slideRealIndex) {
+    function loopCreate(slideRealIndex, initial) {
         const swiper = this;
         const {params, slidesEl} = swiper;
         if (!params.loop || swiper.virtual && swiper.params.virtual.enabled) return;
@@ -1962,16 +1969,17 @@
         } else initSlides();
         swiper.loopFix({
             slideRealIndex,
-            direction: params.centeredSlides ? void 0 : "next"
+            direction: params.centeredSlides ? void 0 : "next",
+            initial
         });
     }
     function loopFix(_temp) {
-        let {slideRealIndex, slideTo = true, direction, setTranslate, activeSlideIndex, byController, byMousewheel} = _temp === void 0 ? {} : _temp;
+        let {slideRealIndex, slideTo = true, direction, setTranslate, activeSlideIndex, initial, byController, byMousewheel} = _temp === void 0 ? {} : _temp;
         const swiper = this;
         if (!swiper.params.loop) return;
         swiper.emit("beforeLoopFix");
         const {slides, allowSlidePrev, allowSlideNext, slidesEl, params} = swiper;
-        const {centeredSlides} = params;
+        const {centeredSlides, initialSlide} = params;
         swiper.allowSlidePrev = true;
         swiper.allowSlideNext = true;
         if (swiper.virtual && params.virtual.enabled) {
@@ -1992,16 +2000,17 @@
         loopedSlides += params.loopAdditionalSlides;
         swiper.loopedSlides = loopedSlides;
         const gridEnabled = swiper.grid && params.grid && params.grid.rows > 1;
-        if (slides.length < slidesPerView + loopedSlides) showWarning("Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled and not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters"); else if (gridEnabled && params.grid.fill === "row") showWarning("Swiper Loop Warning: Loop mode is not compatible with grid.fill = `row`");
+        if (slides.length < slidesPerView + loopedSlides || swiper.params.effect === "cards" && slides.length < slidesPerView + loopedSlides * 2) showWarning("Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters"); else if (gridEnabled && params.grid.fill === "row") showWarning("Swiper Loop Warning: Loop mode is not compatible with grid.fill = `row`");
         const prependSlidesIndexes = [];
         const appendSlidesIndexes = [];
-        let activeIndex = swiper.activeIndex;
+        const cols = gridEnabled ? Math.ceil(slides.length / params.grid.rows) : slides.length;
+        const isInitialOverflow = initial && cols - initialSlide < slidesPerView && !centeredSlides;
+        let activeIndex = isInitialOverflow ? initialSlide : swiper.activeIndex;
         if (typeof activeSlideIndex === "undefined") activeSlideIndex = swiper.getSlideIndex(slides.find((el => el.classList.contains(params.slideActiveClass)))); else activeIndex = activeSlideIndex;
         const isNext = direction === "next" || !direction;
         const isPrev = direction === "prev" || !direction;
         let slidesPrepended = 0;
         let slidesAppended = 0;
-        const cols = gridEnabled ? Math.ceil(slides.length / params.grid.rows) : slides.length;
         const activeColIndex = gridEnabled ? slides[activeSlideIndex].column : activeSlideIndex;
         const activeColIndexWithShift = activeColIndex + (centeredSlides && typeof setTranslate === "undefined" ? -slidesPerView / 2 + .5 : 0);
         if (activeColIndexWithShift < loopedSlides) {
@@ -2015,6 +2024,7 @@
             }
         } else if (activeColIndexWithShift + slidesPerView > cols - loopedSlides) {
             slidesAppended = Math.max(activeColIndexWithShift - (cols - loopedSlides * 2), slidesPerGroup);
+            if (isInitialOverflow) slidesAppended = Math.max(slidesAppended, slidesPerView - cols + initialSlide + 1);
             for (let i = 0; i < slidesAppended; i += 1) {
                 const index = i - Math.floor(i / cols) * cols;
                 if (gridEnabled) slides.forEach(((slide, slideIndex) => {
@@ -2026,6 +2036,10 @@
         requestAnimationFrame((() => {
             swiper.__preventObserver__ = false;
         }));
+        if (swiper.params.effect === "cards" && slides.length < slidesPerView + loopedSlides * 2) {
+            if (appendSlidesIndexes.includes(activeSlideIndex)) appendSlidesIndexes.splice(appendSlidesIndexes.indexOf(activeSlideIndex), 1);
+            if (prependSlidesIndexes.includes(activeSlideIndex)) prependSlidesIndexes.splice(prependSlidesIndexes.indexOf(activeSlideIndex), 1);
+        }
         if (isPrev) prependSlidesIndexes.forEach((index => {
             slides[index].swiperLoopMoveDOM = true;
             slidesEl.prepend(slides[index]);
@@ -2281,7 +2295,7 @@
                 data.isMoved = false;
                 return;
             }
-        } else if (pageX < touches.startX && swiper.translate <= swiper.maxTranslate() || pageX > touches.startX && swiper.translate >= swiper.minTranslate()) return;
+        } else if (rtl && (pageX > touches.startX && -swiper.translate <= swiper.maxTranslate() || pageX < touches.startX && -swiper.translate >= swiper.minTranslate())) return; else if (!rtl && (pageX < touches.startX && swiper.translate <= swiper.maxTranslate() || pageX > touches.startX && swiper.translate >= swiper.minTranslate())) return;
         if (document.activeElement && document.activeElement.matches(data.focusableElements) && document.activeElement !== e.target && e.pointerType !== "mouse") document.activeElement.blur();
         if (document.activeElement) if (e.target === document.activeElement && e.target.matches(data.focusableElements)) {
             data.isMoved = true;
@@ -3272,7 +3286,7 @@
             if (swiper.params.watchOverflow) swiper.checkOverflow();
             if (swiper.params.grabCursor && swiper.enabled) swiper.setGrabCursor();
             if (swiper.params.loop && swiper.virtual && swiper.params.virtual.enabled) swiper.slideTo(swiper.params.initialSlide + swiper.virtual.slidesBefore, 0, swiper.params.runCallbacksOnInit, false, true); else swiper.slideTo(swiper.params.initialSlide, 0, swiper.params.runCallbacksOnInit, false, true);
-            if (swiper.params.loop) swiper.loopCreate();
+            if (swiper.params.loop) swiper.loopCreate(void 0, true);
             swiper.attachEvents();
             const lazyElements = [ ...swiper.el.querySelectorAll('[loading="lazy"]') ];
             if (swiper.isElement) lazyElements.push(...swiper.hostEl.querySelectorAll('[loading="lazy"]'));
@@ -4330,6 +4344,7 @@
         }
     }), 0);
     window["FLS"] = true;
+    addLoadedClass();
     menuInit();
     showMore();
     pageNavigation();
